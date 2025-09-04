@@ -1,0 +1,69 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "app/assets/fonts/Glory-Bold.ttf",
+      "sha1": "0598ed21c83ef2831503c3981379246d2916b1a8"
+    },
+    {
+      "path": "app/assets/fonts/Glory-BoldItalic.ttf",
+      "sha1": "1c922289299f6d422bf0a8a05aed23041ace6056"
+    },
+    {
+      "path": "app/assets/fonts/Glory-ExtraBold.ttf",
+      "sha1": "e231dadbc2aaddeff54c466a3da113273869c119"
+    },
+    {
+      "path": "app/assets/fonts/Glory-ExtraBoldItalic.ttf",
+      "sha1": "892d36bf6e88602a296313f1bebc6958fcf86f19"
+    },
+    {
+      "path": "app/assets/fonts/Glory-ExtraLight.ttf",
+      "sha1": "57d5df96dc6c4b68a3eb9cba369a221924def9a2"
+    },
+    {
+      "path": "app/assets/fonts/Glory-ExtraLightItalic.ttf",
+      "sha1": "e0c0042302623738d366847674436846a2043b72"
+    },
+    {
+      "path": "app/assets/fonts/Glory-Italic.ttf",
+      "sha1": "ac68c305e8d527d93672ff010d5dee80439dcc14"
+    },
+    {
+      "path": "app/assets/fonts/Glory-Light.ttf",
+      "sha1": "141f3ec2fcbd893f1791e1c70a1e6fd2bbae8053"
+    },
+    {
+      "path": "app/assets/fonts/Glory-LightItalic.ttf",
+      "sha1": "7252b87f9791f6e28c19adc3e8caad5f01f87dc3"
+    },
+    {
+      "path": "app/assets/fonts/Glory-Medium.ttf",
+      "sha1": "4b5acca8aed5ea6bf6cb98c48709e9d067eb5a84"
+    },
+    {
+      "path": "app/assets/fonts/Glory-MediumItalic.ttf",
+      "sha1": "6106a00f6bf94886f9b2546daf63459990ea7942"
+    },
+    {
+      "path": "app/assets/fonts/Glory-Regular.ttf",
+      "sha1": "ed2cb470bedf1bff85d356e5f171c7ede9f70f93"
+    },
+    {
+      "path": "app/assets/fonts/Glory-SemiBold.ttf",
+      "sha1": "4b79f9055cbf1645d606093c3097d40f00437c69"
+    },
+    {
+      "path": "app/assets/fonts/Glory-SemiBoldItalic.ttf",
+      "sha1": "91f78380d3a349b62210b4bc528c67454dd73ffd"
+    },
+    {
+      "path": "app/assets/fonts/Glory-Thin.ttf",
+      "sha1": "afdff5492402e9d2ab67bc0c4b1a34178743049b"
+    },
+    {
+      "path": "app/assets/fonts/Glory-ThinItalic.ttf",
+      "sha1": "b8974cf2e0372e98442297a0f2b38dc3979896e4"
+    }
+  ]
+}
