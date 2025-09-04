@@ -11,11 +11,8 @@ import {
 import MapLibreGL, {
   Camera,
   CameraRef,
-  CircleLayer,
   MapView,
   PointAnnotation,
-  ShapeSource,
-  SymbolLayer,
   UserLocation,
 } from '@maplibre/maplibre-react-native';
 import Geolocation from '@react-native-community/geolocation';
@@ -24,22 +21,16 @@ import AppConfig from '../config/appConfig';
 import { IconButton } from 'react-native-paper';
 import colors from '../config/colors';
 import { wp } from '../config/dimension';
-import fonts from '../config/fonts';
 import { useRoute } from '@react-navigation/native';
 
-// Hardcoded lead dataset
-// The coords are now in the standard MapLibreGL format: [longitude, latitude]
 
 const LeadDetails = () => {
   const [nearestLead, setNearestLead] = useState(null) as any;
   const cameraRef = useRef<CameraRef>(null);
   const route = useRoute() as any;
-  const leads = route.params.leads;
-  // Initialize with a default location to prevent a crash
+  const leads = route.params?.leads;
   const [currentLocation, setCurrentLocation] = useState([77.5946, 12.9716]);
   const [isLoading, setIsLoading] = useState(true);
-
-  // Function to move the camera to a specific coordinate
   const moveToLocation = (coords: any) => {
     if (cameraRef.current) {
       cameraRef.current.setCamera({
@@ -60,7 +51,7 @@ const LeadDetails = () => {
     let nearest = leads;
     let minDist = haversine(userHaversineCoords, toHaversine(leads.coords));
 
-    setNearestLead({ ...nearest, distance: (minDist / 1000).toFixed(2) }); // km
+    setNearestLead({ ...nearest, distance: (minDist / 1000).toFixed(2) }); 
   };
 
   useEffect(() => {
@@ -171,8 +162,7 @@ const LeadDetails = () => {
         <View style={styles.infoBox}>
           <Text style={{ fontWeight: 'bold' }}>Lead Details:</Text>
           <Text>Name: {nearestLead.name}</Text>
-          <Text>Distance: {nearestLead.distance} km</Text>
-          <Text>Location: {nearestLead.location} km</Text>
+          <Text>Distance: {nearestLead?.distance} km</Text>
         </View>
       )}
     </View>

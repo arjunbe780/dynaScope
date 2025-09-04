@@ -26,12 +26,10 @@ const OcrUserList = () => {
       <Divider />
       <FlatList
         data={userList}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item, index) => index + ' '.toString()}
         renderItem={({ item }) => <OcrUserListCard values={item} />}
         ListEmptyComponent={
-          <View
-            style={styles.noData}
-          >
+          <View style={styles.noData}>
             <Text>No Users Found</Text>
           </View>
         }
@@ -54,20 +52,18 @@ const styles = StyleSheet.create({
     paddingVertical: wp(10),
   },
   title: {
-    fontWeight: 'bold',
     fontFamily: fonts.GloryBold,
     fontSize: wp(16),
   },
   headerText: {
-    fontWeight: 'bold',
     fontFamily: fonts.GloryBold,
     fontSize: wp(22),
   },
-  noData:{
+  noData: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });
 
 export default OcrUserList;

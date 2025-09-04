@@ -16,6 +16,9 @@ import fonts from '../config/fonts';
 import Geolocation from '@react-native-community/geolocation';
 import NotificationPopUp from './components/NotificationPopUp';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRejectLeadList, setUserList } from '../redux/slice/OcrUserSlice';
 
 // Generate mock leads
 const generateLeadList = () => {
@@ -38,13 +41,29 @@ export default function Dashboard() {
   const [leadsData, setLeadsData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [notification, setNotification] = useState(true);
+  const dispatch = useDispatch() as any;
+  const { rejectLeadList } = useSelector((state: any) => state.ocrUser);
 
   useEffect(() => {
     setLeadsData(generateLeadList());
     getCurrentPosition();
+    getInitialData();
     setIsLoading(false);
   }, []);
 
+  async function getInitialData() {
+    try {
+      const jsonValue = await AsyncStorage.getItem('ocrUserList');
+      const jsonRejectValue = await AsyncStorage.getItem('ocrRejectList');
+      const userList = jsonValue != null ? JSON.parse(jsonValue) : [];
+      const rejectList =
+        jsonRejectValue != null ? JSON.parse(jsonRejectValue) : [];
+      dispatch(setUserList(userList));
+      dispatch(setRejectLeadList(rejectList));
+    } catch (e) {
+      console.error('Failed to load user list from storage:', e);
+    }
+  }
   const getCurrentPosition = async () => {
     Geolocation.getCurrentPosition(
       async pos => {
@@ -135,9 +154,12 @@ export default function Dashboard() {
                 setNotification(false);
                 navigation.navigate('leadDetails', { leads });
               }}
-              reject={(leads: any) => {
+              reject={async (leads: any) => {
                 setNotification(false);
-                navigation.navigate('rejectedLeadsTab', { leads });
+                let temp = [leads, ...rejectLeadList];
+                await AsyncStorage.setItem('ocrRejectList', JSON.stringify(temp));
+                await dispatch(setRejectLeadList(temp));
+                navigation.navigate('rejectedLeadsTab');
               }}
             />
           </View>
@@ -161,12 +183,10 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   title: {
-    fontWeight: 'bold',
     fontFamily: fonts.GloryBold,
     fontSize: wp(16),
   },
   headerText: {
-    fontWeight: 'bold',
     fontFamily: fonts.GloryBold,
     fontSize: wp(22),
   },

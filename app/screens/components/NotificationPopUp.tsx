@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.primaryBackground,
     borderRadius: wp(12),
     padding: wp(20),
     width: '100%',
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnText: {
-    color: '#fff',
+    color: colors.primaryBackground,
     fontSize: wp(16),
     fontFamily: fonts.GloryBold,
   },

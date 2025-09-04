@@ -16,6 +16,8 @@ import colors from '../config/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserList } from '../redux/slice/OcrUserSlice';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import fonts from '../config/fonts';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -102,7 +104,11 @@ export default function OcrAddUser() {
     <View style={styles.container}>
       <Text style={styles.title}>OCR Capture & Validation</Text>
 
-      <ScrollView style={{ flex: 1, paddingBottom: wp(10) }}>
+      <ScrollView
+        style={{ flex: 1, paddingBottom: wp(10) }}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: wp(20) }}
+      >
         <View style={styles.buttonRow}>
           <Button
             mode="contained"
@@ -129,8 +135,10 @@ export default function OcrAddUser() {
             dobConfidence: '',
           }}
           validationSchema={validationSchema}
-          onSubmit={values => {
-            dispatch(setUserList([values, ...userList]));
+          onSubmit={async values => {
+            let temp = [values, ...userList];
+            await AsyncStorage.setItem('ocrUserList', JSON.stringify(temp));
+            dispatch(setUserList(temp));
             navigation.goBack();
           }}
           innerRef={formikRef}
@@ -166,6 +174,7 @@ export default function OcrAddUser() {
                   onBlur={handleBlur('idNumber')}
                   value={values.idNumber}
                   mode="outlined"
+                  keyboardType="numeric"
                 />
                 {touched.idNumber && errors.idNumber && (
                   <Text style={styles.errorText}>{errors.idNumber}</Text>
@@ -234,7 +243,7 @@ export default function OcrAddUser() {
               >
                 <Text
                   style={{
-                    color: '#fff',
+                    color: colors.primaryBackground,
                     padding: wp(12),
                     textAlign: 'center',
                   }}
@@ -251,14 +260,21 @@ export default function OcrAddUser() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: wp(16), backgroundColor: '#fff' },
-  title: { fontSize: wp(20), fontWeight: 'bold', marginBottom: wp(16) },
+  container: {
+    flex: 1,
+    padding: wp(16),
+    backgroundColor: colors.primaryBackground,
+  },
+  title: { fontSize: wp(20), marginBottom: wp(16) },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: wp(16),
   },
-  button: { flex: 1, marginHorizontal: 4 },
+  button: {
+    flex: 1,
+    marginHorizontal: wp(4),
+  },
   imagePreview: {
     width: '100%',
     height: wp(200),

@@ -6,26 +6,21 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import LeadListCard from './components/LeadListCard';
 import { Divider } from 'react-native-paper';
 import colors from '../config/colors';
 import { wp } from '../config/dimension';
 import fonts from '../config/fonts';
 import { useRoute } from '@react-navigation/native';
 import RejectedLeadListCard from './components/RejectedLeadListCard';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function RejectedLeads() {
-  const [leadsData, setLeadsData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const route = useRoute() as any;
-  const leads = route.params?.leads;
+  const { rejectLeadList } = useSelector((state: any) => state.ocrUser);
 
   useEffect(() => {
-    if (leads) {
-      setLeadsData([leads]);
-    }
     setIsLoading(false);
-  }, [leads]);
+  }, []);
   const renderLead = ({ item }: any) => (
     <View style={{ margin: wp(10) }}>
       <RejectedLeadListCard key={item.id} data={item} />
@@ -57,7 +52,7 @@ export default function RejectedLeads() {
 
       {/* Lead List */}
       <FlatList
-        data={leadsData}
+        data={rejectLeadList}
         renderItem={renderLead}
         keyExtractor={item => item.id}
         ListEmptyComponent={
@@ -65,7 +60,7 @@ export default function RejectedLeads() {
             <Text>No Rejected Leads Found</Text>
           </View>
         }
-        contentContainerStyle={{ flex: leadsData?.length > 0 ? 0 : 1 }}
+        contentContainerStyle={{ flex: rejectLeadList?.length > 0 ? 0 : 1 }}
       />
     </View>
   );
@@ -84,12 +79,10 @@ const styles = StyleSheet.create({
     paddingVertical: wp(15),
   },
   title: {
-    fontWeight: 'bold',
     fontFamily: fonts.GloryBold,
     fontSize: wp(16),
   },
   headerText: {
-    fontWeight: 'bold',
     fontFamily: fonts.GloryBold,
     fontSize: wp(22),
   },

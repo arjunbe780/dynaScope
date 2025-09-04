@@ -20,6 +20,13 @@ const fetchLeads = async (query: string) => {
     { id: '1', name: 'Lead A', location: 'Chennai', score: 85 },
     { id: '2', name: 'Lead B', location: 'Bangalore', score: 75 },
     { id: '3', name: 'Lead C', location: 'Hyderabad', score: 92 },
+    { id: '4', name: 'Lead D', location: 'Visakhapatnam', score: 72 },
+    { id: '5', name: 'Lead E', location: 'Andhra Pradesh', score: 42 },
+    { id: '6', name: 'Lead F', location: 'Delhi', score: 55 },
+    { id: '7', name: 'Lead G', location: 'Kerala', score: 77 },
+    { id: '8', name: 'Lead H', location: 'Mumbai', score: 87 },
+    { id: '9', name: 'Lead I', location: 'Pune', score: 65 },
+    { id: '10', name: 'Lead J', location: 'Kolkata', score: 40 },
   ];
 };
 
@@ -34,8 +41,12 @@ const Chat = () => {
     setMessages(prev => [...prev, userMsg]);
 
     const leads = await fetchLeads(text);
-
-    const aiMsg = { id: Date.now().toString(), type: 'ai', leads };
+    const num = Math.floor(Math.random() * 10) + 1;
+    const aiMsg = {
+      id: Date.now().toString(),
+      type: 'ai',
+      leads: leads.slice(0, num),
+    };
     setMessages(prev => [...prev, aiMsg]);
 
     setText('');
@@ -122,10 +133,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f3f3',
     alignSelf: 'flex-start',
   },
-  userText: { color: '#fff', fontFamily: fonts.GloryBold },
+  userText: { color: colors.primaryBackground, fontFamily: fonts.GloryBold },
   aiTitle: { marginBottom: wp(6), fontFamily: fonts.GloryRegular },
   leadCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.primaryBackground,
     borderRadius: wp(8),
     padding: wp(10),
     marginVertical: wp(5),
@@ -140,9 +151,9 @@ const styles = StyleSheet.create({
   inputRow: {
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderColor: '#ddd',
+    borderColor: colors.borderColor,
     padding: wp(10),
-    backgroundColor: '#fff',
+    backgroundColor: colors.primaryBackground,
   },
   input: {
     flex: 1,
@@ -160,11 +171,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   sendLabel: {
-    color: '#fff',
+    color: colors.primaryBackground,
     fontFamily: fonts.GloryBold,
   },
   headerText: {
-    fontWeight: 'bold',
     fontFamily: fonts.GloryBold,
     fontSize: wp(22),
   },

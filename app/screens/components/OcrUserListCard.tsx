@@ -12,7 +12,12 @@ const OcrUserListCard = ({ values }: any) => {
         {/* Name */}
         <View style={styles.row}>
           <Text style={styles.label}>Name:</Text>
-          <Text style={styles.value}>{values.name || '-'}</Text>
+          <Text style={styles.value}>
+            {values.name || '-'}{' '}
+            <Text style={{ color: colors.primaryButton }}>
+              ({values.nameConfidence}%)
+            </Text>
+          </Text>
         </View>
         <ProgressBar
           progress={values.nameConfidence / 100}
@@ -23,7 +28,12 @@ const OcrUserListCard = ({ values }: any) => {
         {/* DOB */}
         <View style={styles.row}>
           <Text style={styles.label}>Date of Birth:</Text>
-          <Text style={styles.value}>{values.dob || '-'}</Text>
+          <Text style={styles.value}>
+            {values.dob || '-'}{' '}
+            <Text style={{ color: colors.primaryButton }}>
+              ({values.dobConfidence}%)
+            </Text>
+          </Text>
         </View>
         <ProgressBar
           progress={values.dobConfidence / 100}
@@ -34,7 +44,12 @@ const OcrUserListCard = ({ values }: any) => {
         {/* ID Number */}
         <View style={styles.row}>
           <Text style={styles.label}>ID Number:</Text>
-          <Text style={styles.value}>{values.idNumber || '-'}</Text>
+          <Text style={styles.value}>
+            {values.idNumber || '-'}{' '}
+            <Text style={{ color: colors.primaryButton }}>
+              ({values.idNumberConfidence}%)
+            </Text>
+          </Text>
         </View>
         <ProgressBar
           progress={values.idNumberConfidence / 100}

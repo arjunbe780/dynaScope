@@ -38,11 +38,9 @@ const RejectedLeadListCard = ({ data }: LeadProps) => {
           {data.score}%
         </Text>
       </View>
-      {isBestLead && (
-        <View style={styles.badge}>
-          <Text style={styles.matchText}>Rejected</Text>
-        </View>
-      )}
+      <View style={styles.badge}>
+        <Text style={styles.matchText}>Rejected</Text>
+      </View>
     </View>
   );
 };
